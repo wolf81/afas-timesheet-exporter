@@ -6,11 +6,11 @@ export type CsvData = string[][]
 
 export const KEYS: string[] = [
     "Date",
-    "Project Id", 
-    "Project Name", 
-    "Task Description", 
-    "Company", 
-    "Duration", 
+    "Project Id",
+    "Project Name",
+    "Task Description",
+    "Company",
+    "Duration",
 ];
 
 export function map(CsvData: CsvData, mapping: Mapping): CsvData {
@@ -47,8 +47,8 @@ export function parse(): CsvData | undefined {
     const rows = blocks.map(b => {
         const dateAttr = b.getAttribute("data-date");
         const date = dateAttr
-            ? new Date(Number(dateAttr)).toISOString().split("T")[0]
-            : "";
+            ? new Date(Number(dateAttr)).toLocaleDateString('en-CA') // yyyy-MM-dd
+            : ''; 
         const proj = b.querySelector('.proj')?.textContent.trim() || ''; // project id
         const desc = "DEPOT"; // b.querySelector('.desc')?.textContent.trim() || ''; // project name
         const desc2 = b.querySelector('.desc2')?.textContent.trim() || ''; // task description
@@ -67,7 +67,7 @@ export function parse(): CsvData | undefined {
         return `"${String(s).replace(/"/g, '""')}"`;
     }
 
-    return rows.map(r => r.map(csvEscape)) ;
+    return rows.map(r => r.map(csvEscape));
 }
 
 export function save(data: CsvData, mapping: Mapping): void {
