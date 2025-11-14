@@ -5,7 +5,6 @@ module.exports = {
   mode: "production",
   entry: {
     background: "./src/background.ts",
-    popup: "./src/popup.ts",
     content: "./src/content.ts"
   },
   output: {
@@ -27,7 +26,6 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: "src/popup.html", to: "popup.html" },
         { from: "manifest.json", to: "manifest.json" },
         { from: "icons", to: "icons" }
       ]
